@@ -16,11 +16,15 @@ class OrdersProducts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Order, order => order.orders_products)
+  @ManyToOne(() => Order, order => order.order_products, {
+    cascade: ['insert', 'update'],
+  })
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @ManyToOne(() => Order, product => product.orders_products)
+  @ManyToOne(() => Product, product => product.order_products, {
+    cascade: ['insert', 'update'],
+  })
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
